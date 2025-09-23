@@ -1,0 +1,112 @@
+[
+  {
+    "sku": "SKU12345",
+    "title": "Lightweight Running Shoes",
+    "description": "Breathable running shoes for training and races.",
+    "price": 89.99,
+    "currency": "USD",
+    "categories": ["shoes", "running"],
+    "stock": 120,
+    "thumbnail": "https://example.com/img/sku12345.jpg",
+    "embedding": []
+  },
+  {
+    "sku": "SKU67890",
+    "title": "DryFit Training T-Shirt",
+    "description": "Quick-dry fabric, ideal for high-intensity workouts.",
+    "price": 24.5,
+    "currency": "USD",
+    "categories": ["t-shirts", "training"],
+    "stock": 300,
+    "thumbnail": "https://example.com/img/sku67890.jpg",
+    "embedding": []
+  },
+  {
+    "sku": "SKU11111",
+    "title": "Light Training Shorts",
+    "description": "Lightweight and comfortable shorts for everyday training.",
+    "price": 29.9,
+    "currency": "USD",
+    "categories": ["shorts", "training"],
+    "stock": 150,
+    "thumbnail": "https://example.com/img/sku11111.jpg",
+    "embedding": []
+  },
+  {
+    "sku": "SKU22222",
+    "title": "Water-Resistant Gym Backpack",
+    "description": "Spacious backpack with multiple compartments and water resistance.",
+    "price": 59.0,
+    "currency": "USD",
+    "categories": ["bags", "training"],
+    "stock": 80,
+    "thumbnail": "https://example.com/img/sku22222.jpg",
+    "embedding": []
+  },
+  {
+    "sku": "SKU33333",
+    "title": "1L Reusable Water Bottle",
+    "description": "BPA-free reusable bottle for daily hydration.",
+    "price": 15.5,
+    "currency": "USD",
+    "categories": ["accessories"],
+    "stock": 500,
+    "thumbnail": "https://example.com/img/sku33333.jpg",
+    "embedding": []
+  },
+  {
+    "sku": "SKU44444",
+    "title": "Fleece-Lined Hoodie",
+    "description": "Soft cotton hoodie with cozy fleece lining.",
+    "price": 49.9,
+    "currency": "USD",
+    "categories": ["hoodies", "casual"],
+    "stock": 200,
+    "thumbnail": "https://example.com/img/sku44444.jpg",
+    "embedding": []
+  },
+  {
+    "sku": "SKU55555",
+    "title": "Anti-Slip Gym Gloves",
+    "description": "Grip-enhancing gloves for weight training.",
+    "price": 19.9,
+    "currency": "USD",
+    "categories": ["accessories", "training"],
+    "stock": 250,
+    "thumbnail": "https://example.com/img/sku55555.jpg",
+    "embedding": []
+  },
+  {
+    "sku": "SKU66666",
+    "title": "UV-Protect Running Cap",
+    "description": "Light cap with UV protection for outdoor runs.",
+    "price": 22.0,
+    "currency": "USD",
+    "categories": ["accessories", "running"],
+    "stock": 300,
+    "thumbnail": "https://example.com/img/sku66666.jpg",
+    "embedding": []
+  },
+  {
+    "sku": "SKU77777",
+    "title": "3-Pack Athletic Socks",
+    "description": "Breathable socks designed for comfort and durability.",
+    "price": 12.5,
+    "currency": "USD",
+    "categories": ["socks", "training"],
+    "stock": 400,
+    "thumbnail": "https://example.com/img/sku77777.jpg",
+    "embedding": []
+  },
+  {
+    "sku": "SKU88888",
+    "title": "Resistance Band",
+    "description": "Elastic band for functional and mobility training.",
+    "price": 14.99,
+    "currency": "USD",
+    "categories": ["accessories", "training"],
+    "stock": 350,
+    "thumbnail": "https://example.com/img/sku88888.jpg",
+    "embedding": []
+  }
+]
