@@ -1,56 +1,45 @@
+import { MongoClient } from 'mongodb';
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { OpenAIEmbeddings } from '@langchain/openai';
+import { MongoDBAtlasVectorSearch } from '@langchain/mongodb';
 
 import { envs } from 'src/config';
-import { loadSeed } from 'src/common/utils';
-import { buildEmbeddingInput } from './utils';
+import { loadSeed } from 'src/common/helpers';
 import { RecommendProductsInput } from './dto';
 import { Product } from './schemas/product.schema';
 
 @Injectable()
 export class ProductsService {
   private readonly embeddingsModel: OpenAIEmbeddings;
+  readonly vectorStore: MongoDBAtlasVectorSearch;
 
   constructor(@InjectModel(Product.name) private productModel: Model<Product>) {
     this.embeddingsModel = new OpenAIEmbeddings({
       modelName: envs.EMBEDDING_MODEL,
-      openAIApiKey: process.env.OPENAI_API_KEY,
     });
 
-    this.generateVectorIndex().then(() => {
-      console.log('✅ Vector index created successfully.');
+    const client = new MongoClient(envs.MONGO_URI || '');
+    const collection = client
+      .db(this.productModel.db.name)
+      .collection(this.productModel.collection.name);
+
+    this.vectorStore = new MongoDBAtlasVectorSearch(this.embeddingsModel, {
+      collection,
+      indexName: 'vector_index',
+      textKey: 'text',
+      embeddingKey: 'embedding',
     });
   }
 
-  async recommend({ query, limit, filters }: RecommendProductsInput) {
-    console.log('Query:', query);
-    console.log('Limit:', limit);
-    console.log('Filters:', filters);
-    // Mock implementation of product recommendation
-    return [
-      {
-        sku: 'SKU123',
-        title: 'Sample Product 1',
-        price: 29.99,
-        currency: 'USD',
-        url: 'https://example.com/product1',
-        thumbnail: 'https://example.com/product1.jpg',
-        categories: ['Category1', 'Category2'],
-        inStock: true,
-      },
-      {
-        sku: 'SKU124',
-        title: 'Sample Product 2',
-        price: 49.99,
-        currency: 'USD',
-        url: 'https://example.com/product2',
-        thumbnail: 'https://example.com/product2.jpg',
-        categories: ['Category3'],
-        inStock: false,
-      },
-    ].slice(0, limit);
+  async recommend({ query, limit }: RecommendProductsInput) {
+    const recommendations = await this.vectorStore.similaritySearch(
+      query,
+      limit,
+    );
+
+    return recommendations.map((r) => r.metadata);
   }
 
   async seedProducts() {
@@ -78,28 +67,10 @@ export class ProductsService {
 
       if (!needs) continue;
 
-      const text = buildEmbeddingInput(product);
-      const vector = await this.embeddingsModel.embedQuery(text);
+      const vector = await this.embeddingsModel.embedQuery(product.text);
       product.embedding = vector;
 
       await product.save();
     }
-  }
-
-  async generateVectorIndex() {
-    await this.productModel.createSearchIndex({
-      name: 'vsidx1',
-      type: 'vectorSearch',
-      definition: {
-        fields: [
-          {
-            type: 'vector',
-            path: 'embedding',
-            numDimensions: 1536,
-            similarity: 'cosine',
-          },
-        ],
-      },
-    });
   }
 }

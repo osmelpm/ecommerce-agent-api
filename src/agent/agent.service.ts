@@ -1,18 +1,19 @@
 import { ChatOpenAI } from '@langchain/openai';
-import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { Inject, Injectable } from '@nestjs/common';
-import { envs } from 'src/config';
-import { finalizeSystem, routerSystem } from './templates';
-import { OrdersService } from 'src/orders/orders.service';
-import { ReturnsService } from 'src/returns/returns.service';
-import { ProductsService } from 'src/products/products.service';
-import { HelpdeskService } from 'src/support/helpdesk.service';
+import { HumanMessage, SystemMessage } from '@langchain/core/messages';
+
 import {
   makeHandoffTool,
   makeOrderStatusTool,
   makeProcessReturnTool,
   makeRecommendProductsTool,
 } from './tools';
+import { envs } from 'src/config';
+import { finalizeSystem, routerSystem } from './templates';
+import { OrdersService } from 'src/orders/orders.service';
+import { ReturnsService } from 'src/returns/returns.service';
+import { ProductsService } from 'src/products/products.service';
+import { HelpdeskService } from 'src/support/helpdesk.service';
 
 @Injectable()
 export class AgentService {
@@ -27,7 +28,6 @@ export class AgentService {
     @Inject() private readonly helpdesk: HelpdeskService,
   ) {
     this.model = new ChatOpenAI({
-      apiKey: envs.OPENAI_API_KEY,
       model: this.MODEL_NAME,
     });
   }
