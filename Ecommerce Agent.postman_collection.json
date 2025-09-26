@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "d1352d96-3a5a-4a8d-8542-8d02a3e67bd4",
+		"name": "Ecommerce Agent",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23557372"
+	},
+	"item": [
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Ask for order status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"I want to know the order status for this order: OR-1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/agent/chat",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agent",
+								"chat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request return",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"I want to return one Sport T-Shirt DryFit in my order OR-1234 because I bought twice for error. I want refund for one of them\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/agent/chat",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agent",
+								"chat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recommnedations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"I want to buy sport shoes, can you recommend for more than 25 USD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/agent/chat",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agent",
+								"chat"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Seed",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/products/seed",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"seed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recommendations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\":\"I want to buy sport shoes, can you recommend for more than 25 USD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/products/seed",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"seed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
