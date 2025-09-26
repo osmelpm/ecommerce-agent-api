@@ -10,7 +10,6 @@ interface IEnvConfig {
   MONGO_URI: string;
   DATABASE_NAME: string;
   EMBEDDING_MODEL: string;
-  // NODE_ENV: 'development' | 'production';
 }
 
 const envSchema = joi
@@ -23,7 +22,6 @@ const envSchema = joi
     MONGO_URI: joi.string().required(),
     DATABASE_NAME: joi.string().default('ecommerce'),
     EMBEDDING_MODEL: joi.string().default('text-embedding-3-small'),
-    // NODE_ENV: joi.string().valid('development', 'production').required(),
   })
   .unknown(true);
 
