@@ -4,23 +4,24 @@ import {
 } from 'src/products/dto';
 import { tool } from '@langchain/core/tools';
 import { ProductsService } from 'src/products/products.service';
+import { ProductDocument } from 'src/products/schemas/product.schema';
 
 export function makeRecommendProductsTool(productsService: ProductsService) {
   return tool(
     async (input: RecommendProductsInput) => {
-      const { query, limit = 5 } = input;
+      const { query, limit = 3 } = input;
 
-      const results = await productsService.recommend({
-        query,
-        limit,
-      });
+      const retriever = productsService.vectorStore.asRetriever(limit);
+
+      const results = await retriever.invoke(query);
 
       if (!results || results.length === 0) {
         return { items: [] };
       }
 
-      return {
-        items: results.map((p: any) => ({
+      const products = results.map(({ metadata }) => {
+        const p = metadata as ProductDocument;
+        return {
           sku: p.sku,
           title: p.title,
           description: p.description ?? '',
@@ -29,8 +30,10 @@ export function makeRecommendProductsTool(productsService: ProductsService) {
           thumbnail: p.thumbnail ?? null,
           categories: p.categories ?? [],
           stock: p.stock,
-        })),
-      };
+        };
+      });
+
+      return { items: products };
     },
     {
       name: 'recommend_products',

@@ -18,7 +18,6 @@ export const routerSystem = PromptTemplate.fromTemplate(`
   Business context:
   - Brand: {brand}
   - Response language: {lang}
-  - Return policy: {returnWindowDays}-day window.
 
   Your only task is to decide and execute the correct tool (function calling).
   Do not make up data. If critical info is missing, ask for just what's necessary.
